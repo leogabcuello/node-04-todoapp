@@ -1,11 +1,12 @@
 const { white } = require('colors');
 const { inquirerMenu, inquirerInput } = require('./helpers/inquirer');
-const TaskRepository = require ('./repositories/TaskRepository'); 
+const { getAllTask, createTask } = require('./services/fileservice');
+// const TaskRepository = require ('./repositories/TaskRepository'); 
 
 const main = async() =>{
 
-    const taskRepository = new TaskRepository();
     let option = '';
+
     do {
         option = await inquirerMenu();
 
@@ -15,10 +16,10 @@ const main = async() =>{
                     console.log('el usuario eligio crear tarea');
                     const title = await inquirerInput('Task Title : ');
                     console.log(title);
-                    taskRepository.createTask(title);
+                    createTask(title);
                     break;
             case 2:
-                    const allTask = taskRepository.getAllTask();
+                    const allTask = getAllTask();
                     console.log(allTask);
                     break;
     
